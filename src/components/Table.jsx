@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { csv } from "d3-fetch";
 import file from "../data/file.csv";
 
-const App = () => {
+const Table = () => {
   const [data, setData] = useState([]);
   const [columns, setColumns] = useState([]);
 
@@ -59,4 +59,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Table;
