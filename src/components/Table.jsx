@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { csv } from "d3-fetch";
+import * as d3 from "d3";
 import file from "../data/file.csv";
 
 const Table = () => {
@@ -42,7 +42,7 @@ const Table = () => {
 
   useEffect(() => {
     const getCsvData = async () => {
-      const csvData = await csv(file);
+      const csvData = await d3.csv(file);
       setData(csvData);
       setColumns(csvData.columns);
     };
