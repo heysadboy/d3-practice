@@ -6,7 +6,7 @@ import Donut from "./Donut";
 import Line from "./Line";
 
 const App = () => {
-  const [option, setOption] = useState(VISUAL_OPTIONS.table);
+  const [option, setOption] = useState(VISUAL_OPTIONS.line);
 
   const getVisualization = () => {
     switch (option) {
