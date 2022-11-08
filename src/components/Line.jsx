@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import * as d3 from "d3";
+import "./style.css";
 
 const Line = () => {
   const initialData = [
@@ -19,16 +20,26 @@ const Line = () => {
 
   useEffect(() => {
     let svgGraph = d3.select("#graph");
+
+    svgGraph.selectAll("*").remove();
+    svgGraph.append("rect").attr("x", 0).attr("y", 0);
+
+    let x = d3.scaleLinear().domain([0, 500]).range([50, 550]);
+
     svgGraph
-      .append("rect")
-      .attr("x", 0)
-      .attr("y", 0)
-      .attr("width", 600)
-      .attr("height", 300)
-      .style("fill", "#69b3a2");
+      .append("g")
+      .attr("transform", "translate(0,250)")
+      .call(d3.axisBottom(x));
+
+    let y = d3.scaleLinear().domain([0, 200]).range([50, 220]);
+
+    svgGraph
+      .append("g")
+      .attr("transform", "translate(50,30)")
+      .call(d3.axisLeft(y));
   }, []);
 
-  return <svg id="graph" width="600" height="300"></svg>;
+  return <svg id="graph" className="graph"></svg>;
 };
 
 export default Line;
