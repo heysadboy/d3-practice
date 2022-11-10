@@ -3,22 +3,16 @@ import * as d3 from "d3";
 import "./style.css";
 
 const Line = () => {
-  const initialData = [
-    { date: "2007-01-01", value: 100 },
-    { date: "2007-02-01", value: 200 },
-    { date: "2007-03-01", value: 300 },
-    { date: "2007-04-01", value: 400 },
-    { date: "2007-05-01", value: 500 },
-    { date: "2007-06-01", value: 600 },
-    { date: "2007-07-01", value: 500 },
-    { date: "2007-08-01", value: 400 },
-    { date: "2007-09-01", value: 300 },
-    { date: "2007-10-01", value: 200 },
-    { date: "2007-11-01", value: 100 },
-    { date: "2007-12-01", value: 100 },
-  ];
-
   useEffect(() => {
+    const data = [
+      { x: 0, y: 0 },
+      { x: 100, y: 50 },
+      { x: 200, y: 150 },
+      { x: 300, y: 150 },
+      { x: 400, y: 180 },
+      { x: 500, y: 200 },
+    ];
+
     let svgGraph = d3.select("#graph");
 
     svgGraph.selectAll("*").remove();
@@ -31,12 +25,27 @@ const Line = () => {
       .attr("transform", "translate(0,250)")
       .call(d3.axisBottom(x));
 
-    let y = d3.scaleLinear().domain([0, 200]).range([50, 220]);
+    let y = d3.scaleLinear().domain([200, 0]).range([50, 220]);
 
     svgGraph
       .append("g")
       .attr("transform", "translate(50,30)")
       .call(d3.axisLeft(y));
+
+    svgGraph
+      .append("path")
+      .datum(data)
+      .attr("fill", "none")
+      .attr("stroke", "steelblue")
+      .attr("stroke-width", 1.5)
+      .attr("transform", "translate(0,30)")
+      .attr(
+        "d",
+        d3
+          .line()
+          .x((d) => x(d.x))
+          .y((d) => y(d.y))
+      );
   }, []);
 
   return <svg id="graph" className="graph"></svg>;
